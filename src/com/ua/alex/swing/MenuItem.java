@@ -11,6 +11,7 @@ import java.awt.RenderingHints;
 public class MenuItem extends javax.swing.JPanel {
     
     private boolean selected;
+    private boolean over;
 
     public MenuItem(ModelMenu data) {
         initComponents();
@@ -39,7 +40,11 @@ public class MenuItem extends javax.swing.JPanel {
         this.selected = selected;
         repaint();
     }
-
+    public void setOver(boolean over){
+        this.over = over;
+        repaint();
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -72,11 +77,15 @@ public class MenuItem extends javax.swing.JPanel {
 
     @Override
     protected void paintComponent(Graphics g) {
-        if (selected) {
+        if (selected || over) {
             Graphics2D d2 = (Graphics2D) g;
             d2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            d2.setColor(new Color(255, 255, 255, 80));
-            d2.fillRoundRect(0, 0, getWidth(), getHeight(), 5, 5);
+            if (selected) {
+                d2.setColor(new Color(255, 255, 255, 80));
+            } else {
+                d2.setColor(new Color(255, 255, 255, 20));
+            }
+            d2.fillRoundRect(10, 0, getWidth()-20, getHeight(), 5, 5);
         }
         super.paintComponent(g);
     }
